@@ -1,0 +1,222 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background: #34495e;
+}
+
+.box {
+    width: 300px;
+    padding: 40px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #191919;
+    text-align: center;
+}
+
+.box h1 {
+    color: white;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.box input[type="text"],
+.box input[type="password"] {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+.box input[type="text"]:focus,
+.box input[type="password"]:focus {
+    width: 280px;
+    border-color: #5cb4ee;
+}
+
+.box input[type="submit"] {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.box input[type="submit"]:hover {
+    background-color: rgba(46, 196, 114, 0.5);
+}
+
+.signup-button {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 20px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 10px 60px 10px 60px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.35s;
+    cursor: pointer;
+    position: absolute;
+    bottom: 25px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    text-decoration: none;
+}
+
+.signup-button:hover {
+    padding: 20px 70px 20px 70px;
+    background-color: rgba(46, 196, 114, 0.5);
+}
+
+.button {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 15px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 10px 60px 10px 60px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.35s;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: rgba(46, 196, 114, 0.5);
+    padding: 20px 60px 20px 60px;
+}
+
+.delbutton {
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 5px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+    border: 2px solid red;
+    padding: 0 30px 0 30px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.delbutton:hover {
+    background-color: rgba(255, 0, 0, 0.5);
+    padding:35px 50px 35px 50px;
+}
+
+#header {
+    margin: 0;
+    background-color: #0c283a;
+    height: 70px;
+    position: relative;
+}
+
+#header h1 {
+    margin: 0;
+    color: white;
+    position: absolute;
+    top: 20%;
+    left: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    display: inline;
+    text-decoration: underline;
+}
+
+#header a {
+    margin: 0;
+    font-family: 'Ubuntu', sans-serif;
+    color: white;
+    position: absolute;
+    right: 5px;
+    border: 2px solid #2ecc71;
+    border-radius: 5%;
+    padding: 24px 15px;
+}
+
+#header a:hover {
+    background-color: rgba(46, 196, 114, 0.5);
+}
+
+#aside {
+    background-color: #0c283a;
+    float: left;
+    height: 89vh;
+    width: 7vw;
+    border-top: 5px solid #295db8;
+    border-bottom: 5px solid #295db8;
+    border-left: .5px solid #295db8;
+    border-right: .5px solid #295db8;
+}
+
+#addnew-button {
+    font-size: 30px;
+    border: 0;
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 0 30px 5px 30px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+#addnew-button:hover {
+    background-color: rgba(46, 196, 114, 0.5);
+    padding: 10px 35px 15px 35px;
+}
+
+#item-container {
+    height: 89vh;
+    margin-top: 3px;
+    margin-left: 7vw;
+    overflow: scroll;
+}
+
+#item-container tr {
+    color:white;
+}
+
+#item-container tr td {
+    border-bottom: 2px dashed #2ec471;
+    border-right: 2px solid #2ec471;
+    padding: 10px 20px;
+}
