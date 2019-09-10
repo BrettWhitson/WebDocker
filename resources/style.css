@@ -113,19 +113,19 @@ body {
 
 .button:hover {
     background-color: rgba(46, 196, 114, 0.5);
-    padding: 20px 60px 20px 60px;
+    /* padding: 20px 60px 20px 60px; */
 }
 
 .delbutton {
     font-family: 'Ubuntu', sans-serif;
-    font-size: 5px;
+    font-size: 35px;
     border: 0;
     background: none;
     display: block;
     margin: 10px auto;
     text-align: center;
     border: 2px solid red;
-    padding: 0 30px 0 30px;
+    padding: 10px 30px 10px 30px;
     outline: none;
     color: white;
     border-radius: 24px;
@@ -135,7 +135,7 @@ body {
 
 .delbutton:hover {
     background-color: rgba(255, 0, 0, 0.5);
-    padding:35px 50px 35px 50px;
+    /* padding: 35px 50px 35px 50px; */
 }
 
 #header {
@@ -201,7 +201,7 @@ body {
 
 #addnew-button:hover {
     background-color: rgba(46, 196, 114, 0.5);
-    padding: 10px 35px 15px 35px;
+    /* padding: 10px 35px 15px 35px; */
 }
 
 #item-container {
@@ -212,7 +212,7 @@ body {
 }
 
 #item-container tr {
-    color:white;
+    color: white;
 }
 
 #item-container tr td {

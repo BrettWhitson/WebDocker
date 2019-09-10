@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>CONSOLE_TEST</title>
+    <title>WebDocker Console</title>
 
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./resources/style.css">
@@ -13,7 +13,7 @@
 
 <body>
     <div id="header">
-        <h1>Welcome to WebDock, <?="{$_GET["username"]}"?></h1>
+        <h1>Welcome to WebDocker, <?="{$_GET["username"]}"?></h1>
         <a href="https://hub.docker.com/">Docker Hub</a>
     </div>
 

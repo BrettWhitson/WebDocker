@@ -1,22 +1,55 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./resources/signupstyle.css">
+    <script src="./javascript/firebase-signup.js"></script>
     <title>WebDocker</title>
 </head>
+
 <body>
-    <form action="signup-complete.php" method="get" class="box">
-        <input type="text" name="fname" placeholder="First Name">
-        <input type="text" name="lname" placeholder="Last Name">
-        <input type="text" name="email" placeholder="Email">
-        <input type="text" name="phone" placeholder="Phone (optional)">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
 
-        <input type="password" placeholder="Password">
-        <input type="password" placeholder="Confirm">
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#config-web-app -->
 
-        <input type="submit" value="Submit">
-    </form>
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyBcN01VtGgruSG5084epcwpBYAZvDNULGo",
+            authDomain: "webdocker-79f6c.firebaseapp.com",
+            databaseURL: "https://webdocker-79f6c.firebaseio.com",
+            projectId: "webdocker-79f6c",
+            storageBucket: "",
+            messagingSenderId: "481734697555",
+            appId: "1:481734697555:web:3c3be628693bc3883f1ca6"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <!-- <form action="./signup-complete.php" method="GET" class="box"> -->
+    <div class="box" id="signup-box">
+        <input type="text" name="fname" id="firstname" placeholder="First Name">
+        <input type="text" name="lname" id="lastname" placeholder="Last Name">
+        <input type="text" name="email" id="email" placeholder="Email">
+        <input type="text" name="phone" id="phone" placeholder="Phone (optional)">
+
+        <input type="password" id="password" placeholder="Password">
+        <input type="password" id="pwconfirm" placeholder="Confirm">
+
+        <input type="submit" value="Submit" onclick="signup()">
+    </div>
+
+    <div class="box" id="signup-success">
+        <h1 id="congrats">Congratulations!</h1>
+        <h1> Welcome to WebDocker, <br><h1 id="confirmation-name"></h1></h1>
+        <h1> A confirmation email has been sent to: <h3 id="confirmation-email"></h3></h1>
+    </div>
+    <!-- </form> -->
 </body>
+
 </html>

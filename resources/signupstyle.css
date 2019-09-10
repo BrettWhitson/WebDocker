@@ -31,6 +31,10 @@ body {
     font-size: 40px;
 }
 
+#signup-success {
+    display: none;
+}
+
 .box input[type="text"],
 .box input[type="password"] {
     font-family: 'Ubuntu', sans-serif;
