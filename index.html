@@ -10,14 +10,20 @@
 </head>
 
 <body>
-    <form action="./console.php" method="get" class="box">
-        <h1>Login</h1>
-        <input type="text" name="username" placeholder="Username" required>
-        <input type="password" placeholder="Password" required>
-        <input type="submit" value="Login">
-       <!--  <a href="./console-test.html">TEST</a> -->
-    </form>
-    <a href="./signup.html" class="signup-button">Sign Up</a>
+    <div id="login-container">
+        <div class="box">
+            <h1>Login</h1>
+            <input type="text" name="username" id="txtEmail" placeholder="Username" required>
+            <input type="password" placeholder="Password" id="txtPassword" required>
+            <input type="submit" id="btnSubmit" value="Login">
+            <!--  <a href="./console-test.html">TEST</a> -->
+        </div>
+        <a href="./signup.html" class="signup-button">Sign Up</a>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    <script src="./javascript/app.js"></script>
 </body>
 
 </html>

@@ -5,6 +5,14 @@ body {
     background: #34495e;
 }
 
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
+
 .box {
     width: 300px;
     padding: 40px;
@@ -197,6 +205,13 @@ body {
     border-radius: 24px;
     transition: 0.25s;
     cursor: pointer;
+}
+
+#signout-btn {
+    padding: 5px 15px 5px 15px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
 #addnew-button:hover {
