@@ -33,8 +33,15 @@
             return auth.signInWithEmailAndPassword(email, pass).catch(e => console.log(e.message));
         }).then(function(){
             // update to console page
-            const newURL = "./console.html";
+            const newURL = "console";
             window.location = newURL;
         })
     });
+
+    txtPassword.addEventListener('keyup', e => {
+        if (e.code === 'Enter') {
+            e.preventDefault();
+            btnSubmit.click();
+        }
+    })
 }());

@@ -6,15 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>WebDocker Console</title>
+    <link rel="shortcut icon" href="">
     <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./resources/style.css">
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    <script src="javascript/console.js" defer></script>
 </head>
 
 <body>
     <div id="console-container">
         <div id="header">
             <h1 id="banner-text"></h1>
-            <a href="https://hub.docker.com/">Docker Hub</a>
+            <a href="https://hub.docker.com/" target="_blank">Docker Hub</a>
         </div>
 
         <aside id="aside">
@@ -52,10 +56,6 @@
                 </tr>
             </table>
         </div>
-
-        <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
-        <script src="./javascript/console.js"></script>
     </div>
 </body>
 

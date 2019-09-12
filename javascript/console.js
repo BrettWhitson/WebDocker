@@ -12,6 +12,7 @@
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
     const signout = document.getElementById("signout-btn");
+    const addnew = document.getElementById("addnew-button");
     const auth = firebase.auth();
 
     auth.onAuthStateChanged(function (user) {
@@ -20,13 +21,16 @@
             document.getElementById("banner-text").innerText = "Welcome to WebDocker, " + displayName;
         } else {
             console.log("no user");
-            window.location = "./index.html";
+            window.location = "index";
         }
     })
 
     signout.addEventListener('click', e => {
         firebase.auth().signOut();
-        window.location = "./index.html";
+        window.location = "./";
     })
 
+    addnew.addEventListener('click', e => {
+        window.location = "newcontainer";
+    })
 }());
