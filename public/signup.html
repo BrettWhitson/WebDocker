@@ -1,0 +1,33 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="./stylesheets/main.css">
+        <script src="./javascripts/firebase-signup.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+        <script src="./javascripts/FB_API_KEY.js"></script>
+        <title>WebDocker</title>
+    </head>
+    <body>
+        <div class="box" id="signup-box">
+            <input type="text" name="fname" id="firstname" placeholder="First Name">
+            <input type="text" name="lname" id="lastname" placeholder="Last Name">
+            <input type="text" name="email" id="email" placeholder="Email">
+            <input type="password" id="password" placeholder="Password">
+            <input type="password" id="pwconfirm" placeholder="Confirm">
+    
+            <input type="submit" value="Submit" onclick="signup()">
+        </div>
+    
+        <div class="box" id="signup-success">
+            <h1 id="congrats">Congratulations!</h1>
+            <h1> Welcome to WebDocker, <br></h1><h1 id="confirmation-name"></h1>
+            <h1> A confirmation email has been sent to: </h1><h3 id="confirmation-email"></h3>
+        </div>
+        <!-- </form> -->
+    
+    
+    </body>
+</html>

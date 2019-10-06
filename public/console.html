@@ -1,0 +1,57 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="" type="">
+    <link rel="stylesheet" href="./stylesheets/main.css">
+    <title>WEBCONSOLE-TEST</title>
+</head>
+
+<body>
+    <div class="header">
+        <div>
+            <h1 id="banner-text">Welcome to WebDocker, </h1>
+        </div>
+        <div>
+            <a href="https://hub.docker.com/" class="button" target="_blank">Docker Hub</a>
+        </div>
+    </div>
+    <div class="content">
+        <div class="sidebar">
+            <a class="button" id="addnew-button" href="#">+</a>
+            <button id="signout-btn" class="button">Sign Out</button>
+        </div>
+        <div class="container-list">
+            <div class="container-item">
+                <table>
+                    <tr>
+                        <td>Container Image Name</td>
+                        <td>Container ID : Container Name</td>
+                        <td>Status (Running : Stopped)</td>
+                        <td>COMMAND TEXT HERE</td>
+                        </td>
+                        <td><button class="button" id="delbutton" onclick="getContainerNames()">DELETE</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="hidden" id="new-container-window">
+            <button id="close-addnew">&#10005;</button>
+            <div>
+                <input type="text" id="txt-new-container" placeholder="Image">
+                <button class="button" id="submit-new-container">Start Container</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    <script src="./javascripts/FB_API_KEY.js"></script>
+    <script src="./javascripts/console.js"></script>
+</body>
+
+</html>
