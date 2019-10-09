@@ -95,6 +95,29 @@ function containerStartStop(IdName) {
 }
 
 
+/**
+ * Kills a specifed Container, by ID, if running and then
+ * removes the container from Docker
+ * 
+ * @param {string} IdName
+ */
+function containerDestroy(IdName) {
+    let container = docker.getContainer(IdName);
+    container.inspect(function (err, data) {
+        if (data.State.Running) {
+            container.kill(function (err) {
+                container.remove(function (err) {
+                    console.log('container removed');
+                });
+            });
+        } else {
+            container.remove(function (err) {
+                console.log('container removed');
+            });
+        }
+    });
+}
+
 // Routing
 
 router.get('/', (req, res) => {
@@ -119,6 +142,20 @@ router.get('/start_stop', (req, res) => {
     res.send(newState);
 });
 
+router.get('/getInfo', (req,res) => {
+    let container = docker.getContainer(ConId);
+    res.send({
+        Image: container.Image,     //ubuntu
+        Name: container.Name[0],    //boring_feynman
+        State: container.State,     //exited
+        Status: container.Status    //Exit 0
+    });
+});
+
+router.delete('/deletecontainer', (req,res) => {
+    containerDestroy(req.body.ConId);
+    res.send("Container Deleted")
+});
 
 // container();
 

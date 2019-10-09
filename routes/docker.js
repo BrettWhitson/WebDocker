@@ -20,7 +20,6 @@ const express = require('express');
  */
 const Docker = require('dockerode');
 const router = express.Router();
-
 /**
  * The main dockerode connection.
  * @constant
@@ -77,6 +76,23 @@ function containerStartStop(IdName) {
     });
 }
 
+function containerDestroy(IdName) {
+    let container = docker.getContainer(IdName);
+    container.inspect(function (err, data) {
+        if (data.State.Running) {
+            container.kill(function (err) {
+                container.remove(function (err) {
+                    console.log('container removed');
+                });
+            });
+        } else {
+            container.remove(function (err) {
+                console.log('container removed');
+            });
+        }
+    });
+}
+
 // Routing
 
 router.get('/', (req, res) => {
@@ -84,22 +100,21 @@ router.get('/', (req, res) => {
 });
 
 router.post('/newcontainer', (req, res) => {
-    console.log(req.body.Image);
     createContainer(req.body.Image, function (container) {
         try {
             container.start();
+            setTimeout(() => {
+                console.log(container.id);
+                res.send(container.id);
+            }, 1500);
         } catch (error) {
             res.send("ERROR CONTAINER NO EXIST YET");
         }
-        setTimeout(() => {
-            console.log(container.id);
-            res.send(container.id);
-        }, 1500);
     });
     console.log("tried request");
 });
 
-router.get('/start_stop', (req, res) => {
+router.get('/startstop', (req, res) => {
     let newState = req.body.StartStop;
     console.log("Switching Container");
     containerStartStop(req.body.Id);
@@ -110,6 +125,19 @@ router.get('/start_stop', (req, res) => {
         newState = "running";
     }
     res.send(newState);
+});
+
+router.get('/getinfo', (req,res) => {
+    container = docker.getContainer(req.query.ID);
+    container.inspect(function (err, data) {
+        res.send(data);
+     });
+});
+
+router.delete('/deletecontainer', (req,res) => {
+    console.log(req.body.delID);
+    containerDestroy(req.body.delID);
+    res.send("Container Deleted")
 });
 
 module.exports = router;

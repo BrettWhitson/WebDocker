@@ -24,15 +24,15 @@
             <button id="signout-btn" class="button">Sign Out</button>
         </div>
         <div class="container-list">
-            <div class="container-item">
+            <div class="hidden container-item" id="template-item">
                 <table>
                     <tr>
-                        <td>Container Image Name</td>
-                        <td>Container ID : Container Name</td>
-                        <td>Status (Running : Stopped)</td>
-                        <td>COMMAND TEXT HERE</td>
-                        </td>
-                        <td><button class="button" id="delbutton" onclick="getContainerNames()">DELETE</button></td>
+                        <td id="container-ID">ID <span id="full-id">TEST</span></td>
+                        <td id="container-image">image</td>
+                        <td id="container-cmd">cmd</td>
+                        <td id="container-status">status</td>
+                        <td id="container-name">name</td>
+                        <td><button class="button delbutton">DELETE</button></td>
                     </tr>
                 </table>
             </div>
@@ -50,6 +50,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
     <script src="./javascripts/FB_API_KEY.js"></script>
     <script src="./javascripts/console.js"></script>
 </body>

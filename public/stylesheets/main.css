@@ -291,11 +291,11 @@ body,
   letter-spacing: 2px;
 }
 
-.content .container-list .container-item table tr td #delbutton {
+.content .container-list .container-item table tr td .delbutton {
   border: 2px solid #e74c3c;
 }
 
-.content .container-list .container-item table tr td #delbutton:hover {
+.content .container-list .container-item table tr td .delbutton:hover {
   background-color: rgba(231, 76, 60, 0.4);
 }
 

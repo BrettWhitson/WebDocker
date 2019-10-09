@@ -8,6 +8,7 @@ function signup() {
     var pwconfirm = document.getElementById("pwconfirm").value;
     document.getElementById("confirmation-name").innerText = fname + " " + lname;
     document.getElementById("confirmation-email").innerText = email;
+    var database = firebase.database();
 
     // Sign in with email and pass.
     // [START createwithemail]
@@ -39,8 +40,13 @@ function signup() {
         // send user confirmation email of sign up
         firebase.auth().currentUser.sendEmailVerification();
     }).then(function(){
-        firebase.auth().currentUser.updateProfile({
+        var currentUser = firebase.auth().currentUser;
+        currentUser.updateProfile({
             displayName: fname,
+            email: email
+        })
+        database.ref('users/'+currentUser.uid).set({
+            name: fname,
             email: email
         })
     }).then(function () {
