@@ -1,6 +1,7 @@
+
+/* FIREBASE API KEY HERE */
+
 function signup() {
-    document.getElementById("signup-box").style.display = "none";
-    document.getElementById("signup-success").style.display = "block";
     var fname = document.getElementById("firstname").value;
     var lname = document.getElementById("lastname").value;
     var email = document.getElementById("email").value;
@@ -12,7 +13,25 @@ function signup() {
 
     // Sign in with email and pass.
     // [START createwithemail]
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(function () {
+        firebase.auth().signInWithEmailAndPassword(email, password);
+        firebase.auth().currentUser.sendEmailVerification();
+        var currentUser = firebase.auth().currentUser;
+        
+        currentUser.updateProfile({
+            displayName: fname,
+            email: email
+        })
+        database.ref('users/'+currentUser.uid).set({
+            name: fname,
+            email: email
+        })
+        document.getElementById("signup-box").style.display = "none";
+        document.getElementById("signup-success").style.display = "block";
+        firebase.auth().signOut();
+    })
+    .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -22,35 +41,5 @@ function signup() {
             alert(errorMessage);
         }
         console.log(error);
-    }).then(function () {
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode === 'auth/wrong-password') {
-                alert('Wrong password.');
-            } else {
-                alert(errorMessage);
-            }
-            console.log(error);
-            document.getElementById('quickstart-sign-in').disabled = false;
-
-        });
-    }).then(function () {
-        // send user confirmation email of sign up
-        firebase.auth().currentUser.sendEmailVerification();
-    }).then(function(){
-        var currentUser = firebase.auth().currentUser;
-        currentUser.updateProfile({
-            displayName: fname,
-            email: email
-        })
-        database.ref('users/'+currentUser.uid).set({
-            name: fname,
-            email: email
-        })
-    }).then(function () {
-        // sign user out
-        firebase.auth().signOut();
     });
 }

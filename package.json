@@ -4,19 +4,23 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www &"
+    "dev": "nodemon ./bin/www",
+    "ws": "nodemon ./wsserver.js"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
-    "dockerode": "^3.0.1",
+    "dockerode": "^3.0.2",
     "express": "~4.16.1",
+    "express-ws": "^4.0.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "^2.0.4"
+    "pug": "^2.0.4",
+    "websocket-stream": "^5.5.0",
+    "xterm": "^4.2.0"
   },
   "devDependencies": {
-    "nodemon": "^1.19.3"
+    "nodemon": "^1.19.4"
   }
 }

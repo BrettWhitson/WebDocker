@@ -19,6 +19,9 @@ const express = require('express');
  * @type {Dockerode}
  */
 const Docker = require('dockerode');
+// var expressWS = require('express-ws');
+// var websocket = require('websocket-stream/stream');
+const http = require('http');
 const router = express.Router();
 /**
  * The main dockerode connection.
@@ -31,6 +34,12 @@ const docker = new Docker({
     port: 2375
 });
 
+// var wsapp = express();
+// const wsServer = http.createServer(wsapp);
+// expressWS(wsapp, wsServer);
+
+
+
 /**
  * Creates a Container in Docker given the application name
  * @param {string} imageName App Name
@@ -42,13 +51,36 @@ function createContainer(imageName, fn) {
         Image: imageName,
         Tty: true,
         AttachStdin: true,
-        Cmd: ['/bin/sh']
+        AttachStdout: true,
+        AttachStderr: true,
+        Cmd: ['/bin/sh'],
+        OpenStdin: true
     }, function (err, container) {
-        // console.log(container);
+        if(err) {
+            pullImage(imageName);
+        }
+        console.log(imageName); 
         fn(container);
     });
-
 }
+
+function pullAndStart(imageName) {
+    docker.pull(imageName, function (err, container) {
+        docker.createContainer({
+            Image: imageName,
+            Tty: true,
+            AttachStdin: true,
+            Cmd: ['/bin/sh']
+        });
+    });
+}
+
+function pullImage(imageName) {
+    docker.pull(imageName, function (err) {
+        console.log(err);
+    });
+}
+
 
 
 function getContainerNames() {
@@ -76,6 +108,12 @@ function containerStartStop(IdName) {
     });
 }
 
+/**
+ * Kills a specifed Container, by ID, if running and then
+ * removes the container from Docker
+ * 
+ * @param {string} IdName
+ */
 function containerDestroy(IdName) {
     let container = docker.getContainer(IdName);
     container.inspect(function (err, data) {
@@ -99,14 +137,36 @@ router.get('/', (req, res) => {
     res.send("<h1>Woo!</h1>")
 });
 
+// wsapp.ws('/ws/:Id', (ws, req) => {
+//     ws.on('open', msg => {
+//         var container = docker.getContainer(req.params.Id);
+//         container.attach({stream: true, stdin:true, stdout: true, stderr: true}, function (err, stream) {
+//             ws = websocket('wss://webdocker.utm.edu/docker/ws/'+ req.params.Id);
+//             process.stdin.pipe(ws);
+//             ws.pipe(process.stdout);
+//             console.log(err);
+//         });
+//     })
+
+//     ws.on('close', () => {
+//         console.log('WebSocket was closed')
+//     })
+    
+//     var container = docker.getContainer(req.params.Id);
+//     container.attach({stream: true, stdin:true, stdout: true, stderr: true}, function (err, stream) {
+//         var ws = websocket('wss://webdocker.utm.edu/docker/ws/'+ req.params.Id);
+//         process.stdin.pipe(ws);
+//         ws.pipe(process.stdout);
+//         console.log(err)
+//     });
+// });
+
 router.post('/newcontainer', (req, res) => {
     createContainer(req.body.Image, function (container) {
         try {
             container.start();
-            setTimeout(() => {
-                console.log(container.id);
-                res.send(container.id);
-            }, 1500);
+            console.log(container.id);
+            res.send(container.id);
         } catch (error) {
             res.send("ERROR CONTAINER NO EXIST YET");
         }
@@ -115,16 +175,16 @@ router.post('/newcontainer', (req, res) => {
 });
 
 router.get('/startstop', (req, res) => {
-    let newState = req.body.StartStop;
+    let newState = req.query.StartStop;
     console.log("Switching Container");
-    containerStartStop(req.body.Id);
+    containerStartStop(req.query.Id);
     console.log("Sending new state Parameter");
     if (newState === "running") {
         newState = "exited";
     } else {
         newState = "running";
     }
-    res.send(newState);
+    res.send(newState); 
 });
 
 router.get('/getinfo', (req,res) => {
@@ -134,10 +194,22 @@ router.get('/getinfo', (req,res) => {
      });
 });
 
+// router.get('/pull', (req,res) => {
+//     pullImage(req.body.Image, function (container) {
+//         try {
+//             res.send(container.id);
+//         } catch (error) {
+//             res.send("ERROR CONTAINER NO EXIST YET");
+//         }
+//     });
+//     console.log("tried request");
+// });
+
 router.delete('/deletecontainer', (req,res) => {
     console.log(req.body.delID);
     containerDestroy(req.body.delID);
     res.send("Container Deleted")
 });
 
+// wsServer.listen(8080);
 module.exports = router;

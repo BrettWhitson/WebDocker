@@ -4,9 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm@4.2.0/lib/xterm.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit@0.4.0-beta1/lib/xterm-addon-fit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-attach@0.3.0/lib/xterm-addon-attach.min.js"></script>
     <link rel="shortcut icon" href="" type="">
     <link rel="stylesheet" href="./stylesheets/main.css">
-    <title>WEBCONSOLE-TEST</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm@4.2.0/css/xterm.css">
+
+    <title>WEBCONSOLE</title>
 </head>
 
 <body>
@@ -23,6 +29,7 @@
             <a class="button" id="addnew-button" href="#">+</a>
             <button id="signout-btn" class="button">Sign Out</button>
         </div>
+
         <div class="container-list">
             <div class="hidden container-item" id="template-item">
                 <table>
@@ -30,28 +37,40 @@
                         <td id="container-ID">ID <span id="full-id">TEST</span></td>
                         <td id="container-image">image</td>
                         <td id="container-cmd">cmd</td>
-                        <td id="container-status">status</td>
+                        <td id="container-status"><button class="button status-btn"></button></td>
                         <td id="container-name">name</td>
                         <td><button class="button delbutton">DELETE</button></td>
                     </tr>
                 </table>
+                <div id="terminal-window"></div>
+                <script>
+                    $("#terminal-window").hide();
+                </script>
+
             </div>
         </div>
 
         <div class="hidden" id="new-container-window">
             <button id="close-addnew">&#10005;</button>
-            <div>
+            <div id="suggestion-box">
+                <button class="button">Ubuntu</button>
+                <button class="button">MySQL</button>
+                <button class="button">Mongo</button>
+                <button class="button">Alpine</button>
+                <button class="button">Node</button>
+            </div>
+            <div id=new-container-input>
                 <input type="text" id="txt-new-container" placeholder="Image">
                 <button class="button" id="submit-new-container">Start Container</button>
             </div>
         </div>
 
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
-    <script src="./javascripts/FB_API_KEY.js"></script>
     <script src="./javascripts/console.js"></script>
 </body>
 

@@ -1,0 +1,59 @@
+<html lang="en">
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-database.js"></script>
+    <script>
+        $("html").css("visibility", "hidden");
+    </script>
+    <link rel="shortcut icon" href="" type="">
+    <link rel="stylesheet" href="./stylesheets/main.css">
+    <title>WEBDOCKER ADMIN</title>
+</head>
+
+<body>
+    <div class="header">
+        <div>
+            <h1 id="banner-text">Welcome to WebDocker, Admin</h1>
+        </div>
+    </div>
+    <div class="content">
+        <div class="sidebar">
+            <!-- <a class="button" id="addnew-button" href="#">+</a> -->
+            <button id="signout-btn" class="button">Sign Out</button>
+        </div>
+
+        <div class="container-list">
+            <div class="user-list-item-container template hidden">
+                <div class="container-item user-header" id="template-user-header">
+                    <table>
+                        <tr>
+                            <td class="display-name">USER NAME</td>
+                            <td class="user-email">USER EMAIL</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="container-item user-info hidden" id="template-user-container">
+                    <table>
+                        <tr>
+                            <td id="container-ID">ID</td>
+                            <td id="container-image">image</td>
+                            <td id="container-cmd">cmd</td>
+                            <td id="container-status">status</td>
+                            <td id="container-name">name</td>
+                            <td><button class="button delbutton">DELETE</button></td>
+                        </tr>
+                    </table>
+                </div>
+                <script>
+                    $(".user-info").hide();
+                </script>
+            </div>
+        </div>
+    </div>
+    <script src="./javascripts/admin.js"></script>
+</body>
+
+</html>

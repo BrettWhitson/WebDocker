@@ -16,14 +16,21 @@
             <input type="text" name="username" id="txtEmail" placeholder="Username">
             <input type="password" placeholder="Password" id="txtPassword">
             <input type="submit" id="btnSubmit" value="Login">
+            <a id="forgot-password-link">Forgot Password</a>
             <!--  <a href="./console-test.html">TEST</a> -->
         </div>
-        <a href="signup.html" class="signup-button">Sign Up</a>
+        <a href="signup.html" class="button signup-button">Sign Up</a>
     </div>
 
+    <div class="hidden" id="forgot-password-window">
+        <button>&#10005;</button>
+        <input type="text" name="email" id="txt-forgot-password" placeholder="email">
+        <input type="button" id="btn-forgot-password" class="button" value="Submit">
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.6.0/firebase-auth.js"></script>
-    <script src="./javascripts/FB_API_KEY.js"></script>
     <script src="./javascripts/login.js"></script>
 </body>
 
