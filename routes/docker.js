@@ -14,17 +14,25 @@
  * @type {Express}
  */
 const express = require('express');
+
 /**
  * main importation of dockerode
+ * @constant
  * @type {Dockerode}
  */
 const Docker = require('dockerode');
-// var expressWS = require('express-ws');
-// var websocket = require('websocket-stream/stream');
+
 const http = require('http');
-const router = express.Router();
+
 /**
- * The main dockerode connection.
+ * initializing Express Router to use for HTTP request routing
+ * @constant
+ * @type {Router}
+ */
+const router = express.Router();
+
+/**
+ * The main dockerode connection to local Docker instance.
  * @constant
  * 
  * @type {Dockerode}
@@ -34,17 +42,16 @@ const docker = new Docker({
     port: 2375
 });
 
-// var wsapp = express();
-// const wsServer = http.createServer(wsapp);
-// expressWS(wsapp, wsServer);
-
 
 
 /**
- * Creates a Container in Docker given the application name
- * @param {string} imageName App Name
+ * Creates a Container in local Docker and runs given function with 
+ *  the container as a parameter, usually should be a start function
  * 
- * @returns {string} Id of container
+ * @function
+ * @param {string} imageName App Name
+ * @param {function} fn
+ * 
  */
 function createContainer(imageName, fn) {
     docker.createContainer({
@@ -64,6 +71,14 @@ function createContainer(imageName, fn) {
     });
 }
 
+/**
+ * Attempts to pull new images to local docker then create a container from the 
+ *  image.
+ * Should only gets called if the image is not in docker already.
+ * 
+ * @function
+ * @param {string} imageName 
+ */
 function pullAndStart(imageName) {
     docker.pull(imageName, function (err, container) {
         docker.createContainer({
@@ -75,6 +90,14 @@ function pullAndStart(imageName) {
     });
 }
 
+/**
+ * Attempts to pull new images to local docker to use later.
+ * Only gets called if the image is not in docker already and called by the 
+ * createContainer function
+ * 
+ * @function
+ * @param {string} imageName 
+ */
 function pullImage(imageName) {
     docker.pull(imageName, function (err) {
         console.log(err);
@@ -82,18 +105,23 @@ function pullImage(imageName) {
 }
 
 
-
-function getContainerNames() {
+/**
+ * Test to print all containers and all their information
+ * 
+ * @function
+ * @ignore
+ */
+function getContainer() {
     docker.listContainers(function (err, containers) {
         console.log(containers);
     });
 }
 
 /**
- * Takes the Id of a Container,
- *  Checks if it is running or not,
- *  and then toggle that state of the container
+ * Takes the Id of a Container checks if it is running or not, then toggle that
+ *  state of the container
  * 
+ * @function
  * @param {string} IdName The ID of the Container chosen
  */
 function containerStartStop(IdName) {
@@ -112,6 +140,7 @@ function containerStartStop(IdName) {
  * Kills a specifed Container, by ID, if running and then
  * removes the container from Docker
  * 
+ * @function
  * @param {string} IdName
  */
 function containerDestroy(IdName) {
@@ -131,12 +160,22 @@ function containerDestroy(IdName) {
     });
 }
 
-// Routing
+/**************************ROUTING STARTS**************************/
 
+/**
+ * Route for Testing default route
+ * 
+ * @name get/
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware -Express middleware
+ */
 router.get('/', (req, res) => {
     res.send("<h1>Woo!</h1>")
 });
 
+
+/* Test Code - Soon to be Deleted */
 // wsapp.ws('/ws/:Id', (ws, req) => {
 //     ws.on('open', msg => {
 //         var container = docker.getContainer(req.params.Id);
@@ -161,6 +200,14 @@ router.get('/', (req, res) => {
 //     });
 // });
 
+/**
+ * Route called to create a new container
+ * 
+ * @name post/newcontainer
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware -Express middleware
+ */
 router.post('/newcontainer', (req, res) => {
     createContainer(req.body.Image, function (container) {
         try {
@@ -174,6 +221,14 @@ router.post('/newcontainer', (req, res) => {
     console.log("tried request");
 });
 
+/**
+ * Route called to toggle and return the new state of a singular container
+ * 
+ * @name get/startstop
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware -Express middleware
+ */
 router.get('/startstop', (req, res) => {
     let newState = req.query.StartStop;
     console.log("Switching Container");
@@ -187,6 +242,14 @@ router.get('/startstop', (req, res) => {
     res.send(newState); 
 });
 
+/**
+ * Route called to GET information for a singular container
+ * 
+ * @name get/getinfo
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware -Express middleware
+ */
 router.get('/getinfo', (req,res) => {
     container = docker.getContainer(req.query.ID);
     container.inspect(function (err, data) {
@@ -194,22 +257,20 @@ router.get('/getinfo', (req,res) => {
      });
 });
 
-// router.get('/pull', (req,res) => {
-//     pullImage(req.body.Image, function (container) {
-//         try {
-//             res.send(container.id);
-//         } catch (error) {
-//             res.send("ERROR CONTAINER NO EXIST YET");
-//         }
-//     });
-//     console.log("tried request");
-// });
 
+/**
+ * Route called to delete containers
+ * 
+ * @name delete/deletecontainer
+ * @function
+ * @param {string} path - Express path
+ * @param {callback} middleware -Express middleware
+ */
 router.delete('/deletecontainer', (req,res) => {
+    //logs the ID given to the request
     console.log(req.body.delID);
     containerDestroy(req.body.delID);
     res.send("Container Deleted")
 });
 
-// wsServer.listen(8080);
 module.exports = router;

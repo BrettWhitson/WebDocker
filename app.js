@@ -1,3 +1,5 @@
+
+//Initializing all node modules used
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -5,10 +7,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
-
-
-
-
+//Initializing all Express Routers for the website 
 var dockerRouter = require('./routes/docker');
 var indexRouter = require('./routes/index');
 
