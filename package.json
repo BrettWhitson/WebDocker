@@ -16,7 +16,7 @@
     "express-ws": "^4.0.0",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "^2.0.4",
+    "pug": "^3.0.1",
     "websocket-stream": "^5.5.0",
     "xterm": "^4.2.0"
   },
